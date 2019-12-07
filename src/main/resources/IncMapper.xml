@@ -50,7 +50,7 @@
     </select>
 
     <insert id="add" parameterType="com.zxk.demo.entity.Investment" >
-        insert into test_zxk_Investment_info
+        insert into test_zxk_investment_info
         (investment_project_number,project_name,person,money,begin_date,end_date,actual_money,actual_begin_date,actual_end_date,file_name)
         values
         (#{investmentNumber},#{projectName},#{person},#{money},#{beginDate},
@@ -59,7 +59,7 @@
     </insert>
 
     <update id="updateFile" parameterType="java.lang.Integer">
-        update test_zxk_Investment_info set file_name=null where investment_project_number=#{investmentNumber}
+        update test_zxk_investment_info set file_name=null where investment_project_number=#{investmentNumber}
     </update>
 
 
