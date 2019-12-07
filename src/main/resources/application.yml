@@ -1,0 +1,34 @@
+spring:
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+
+
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.79.165.12:3306/springboottest?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    username: root
+    password: 11
+
+  application:
+    name: InvestmentProject
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 4MB
+      max-request-size: 4MB
+server:
+  port: 8089
+
+mybatis:
+    config-locations: classpath:mybatis-config.xml
+    mapper-locations: classpath:IncMapper.xml
+
+#thymeleaf:
+#  prefix: /templates/
+#  suffix: .html
+#  mode: HTML5
+#  encoding: utf-8

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxk.demo.dao.InvestmentDao">
+    <resultMap id="BaseResultMap" type="com.zxk.demo.dto.InvestmentDto">
+        <id column="investment_project_number"  property="investmentNumber" />
+        <result column="project_name"  property="projectName" />
+        <result column="person"  property="person" />
+        <result column="money"  property="money" />
+        <result column="begin_date"  property="beginDate" />
+        <result column="end_date"  property="endDate" />
+        <result column="actual_money"  property="actualMoney" />
+        <result column="actual_begin_date"  property="aBeginDate" />
+        <result column="actual_end_date"  property="aEndDate" />
+        <result column="file_name"  property="fileName" />
+    </resultMap>
+
+    <select id="findInvestmentByNumber" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from test_zxk_investment_info
+        where investment_project_number=#{investmentNumber}
+
+    </select>
+    <select id="findAll"  resultMap="BaseResultMap">
+        select * from test_zxk_investment_info
+
+    </select>
+
+    <select id="findInt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select money from test_zxk_investment_info where investment_project_number=#{investmentNumber}
+
+    </select>
+
+    <delete id="del" parameterType="java.lang.Integer">
+        delete from test_zxk_investment_info where investment_project_number=#{investmentNumber}
+    </delete>
+
+    <select id="search" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from test_zxk_investment_info
+        <where>
+            <if test="investmentNumber!=null">
+                investment_project_number like CONCAT('%',#{investmentNumber},'%')
+            </if>
+            <if test="projectName!=null">
+                and project_name like CONCAT('%',#{projectName},'%')
+            </if>
+            <if test="person!=null">
+                and person like CONCAT('%',#{person},'%')
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="add" parameterType="com.zxk.demo.entity.Investment" >
+        insert into test_zxk_Investment_info
+        (investment_project_number,project_name,person,money,begin_date,end_date,actual_money,actual_begin_date,actual_end_date,file_name)
+        values
+        (#{investmentNumber},#{projectName},#{person},#{money},#{beginDate},
+        #{endDate},#{actualMoney},#{aBeginDate},#{aEndDate},#{fileName})
+
+    </insert>
+
+    <update id="updateFile" parameterType="java.lang.Integer">
+        update test_zxk_Investment_info set file_name=null where investment_project_number=#{investmentNumber}
+    </update>
+
+
+</mapper>
